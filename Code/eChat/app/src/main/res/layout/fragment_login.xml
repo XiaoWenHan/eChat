@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 欢迎文本 -->
+    <TextView
+        android:id="@+id/fragment_login_welcome_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/fragment_login_welcome_tv_text" />
+
+    <!-- 用户名 -->
+    <LinearLayout
+        android:id="@+id/fragment_login_username_input_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_login_welcome_tv"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/fragment_login_username_tv_text" />
+
+        <EditText
+            android:id="@+id/fragment_login_username_et"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="@string/fragment_login_username_tv_text" />
+    </LinearLayout>
+
+    <!-- 记住用户 -->
+    <CheckBox
+        android:id="@+id/fragment_login_remember_me_cb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_login_username_input_ll"
+        android:text="@string/fragment_login_remember_me_cb" />
+
+    <!-- 登录按钮 -->
+    <Button
+        android:id="@+id/fragment_login_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_login_remember_me_cb"
+        android:layout_centerHorizontal="true"
+        android:text="@string/fragment_login_login_btn_text" />
+
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">eChat</string>
+    <!-- LoginFragment 相关 -->
+    <string name="fragment_login_welcome_tv_text">欢迎</string>
+    <string name="fragment_login_username_tv_text">登录名</string>
+    <string name="fragment_login_username_et_hint">在此输入登录账号</string>
+    <string name="fragment_login_remember_me_cb">记住我</string>
+    <string name="fragment_login_login_btn_text">登录</string>
+</resources>
