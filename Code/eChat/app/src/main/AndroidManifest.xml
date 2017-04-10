@@ -60,8 +60,8 @@
     //允许一个程序接收到 ACTION_BOOT_COMPLETED广播在系统完成启动
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_LOGS" />
-    <!-- ======================================容联SDK必需权限结束====================================== -->
 
+    <!-- ======================================容联SDK必需权限结束====================================== -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -69,19 +69,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
+
         <!-- ======================================容联SDK必需权限开始====================================== -->
         // SDK核心服务配置
         <service
             android:name="com.yuntongxun.ecsdk.ECClientService"
             android:enabled="true"
             android:process=":push" />
-
         // 提高sdk服务存活率（v5.2.2r以后版本提供）
         <service
             android:name="com.yuntongxun.ecsdk.ECClientService$InnerService"
             android:enabled="true"
             android:process=":push" />
-
         // 以下两项为SDK内部处理项，其中booter.Alarm在v5.1.9r以后版本提供
         <receiver
             android:name="com.yuntongxun.ecsdk.booter.CCPReceivers$AlarmReceiver"
@@ -90,7 +89,6 @@
             android:name="com.yuntongxun.ecsdk.booter.Alarm"
             android:exported="false"
             android:process=":push" />
-
         // SDK网络改变广播
         <receiver
             android:name="com.yuntongxun.ecsdk.booter.CCPReceivers$ConnectionReceiver"
@@ -99,7 +97,6 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-
         // SDK广播通知配置（开机广播）
         // 可选广播、如果应用想做开机重启，可以实现该广播通知即可
         <receiver
@@ -109,7 +106,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
         // 声明自定义通知的广播接收器（需要替换包名，详见注意事项）
         <receiver
             android:name=".Service.RlNotifyReceiver"
@@ -124,6 +120,14 @@
             </intent-filter>
         </receiver>
         <!-- ======================================容联SDK必需权限结束====================================== -->
+
+        <receiver android:name=".receiver.RlMsgHandleCenterReceiver">
+            <intent-filter>
+                <action android:name="com.wenhan.echat.init" />
+                <action android:name="com.wenhan.echat.connect" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".ui.login.LoginActivity"
             android:windowSoftInputMode="adjustResize">

@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.wenhan.echat.R;
 import com.wenhan.echat.ui.BaseFragment;
+import com.wenhan.echat.util.rl.RLConnectionUtil;
 import com.wenhan.echat.util.sharedprefs.SharedPrefUtil;
 
 /**
@@ -26,6 +27,10 @@ public class LoginFragment extends BaseFragment {
     private EditText usernameInputEt;
     private CheckBox rememberMeCb;
     private Button loginBtn;
+
+    private LoginActivity loginActivity;
+
+    private RLConnectionUtil rlConnectionUtil;
 
     @Nullable
     @Override
@@ -44,15 +49,35 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void setListener() {
+        //记住我复选框
         rememberMeCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPrefUtil.getInstance(getActivity()).saveRememberMeStatus(isChecked);
             }
         });
+        //登录按钮
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pendingLogin();
+            }
+        });
+    }
+
+    private void pendingLogin() {
+        if (usernameInputEt.getText().toString() == null && usernameInputEt.getText().toString().equals("")) {
+            loginActivity.showToast(R.string.fragment_login_login_failed_empty_input);
+            return;
+        }
+        loginActivity.showProgressDialog(getResources().getString(R.string.fragment_login_login_doing_tip), null);
+        usernameInputEt.setEnabled(false);
+        rlConnectionUtil.login(usernameInputEt.getText().toString());
     }
 
     private void init() {
+        loginActivity = (LoginActivity) getActivity();
+        rlConnectionUtil = RLConnectionUtil.getInstance(loginActivity.getBaseContext());
         rememberMeCb.setChecked(SharedPrefUtil.getInstance(getActivity()).getRememberMeStatus());
     }
 

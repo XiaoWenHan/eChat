@@ -2,7 +2,10 @@ package com.wenhan.echat.util.rl;
 
 import android.content.Context;
 
+import com.wenhan.echat.constants.AppConfigConsts;
+import com.wenhan.echat.util.sharedprefs.Constants;
 import com.yuntongxun.ecsdk.ECDevice;
+import com.yuntongxun.ecsdk.ECInitParams;
 
 /**
  * 作者：萧文翰
@@ -15,6 +18,8 @@ public class RLConnectionUtil {
     private Context context;
 
     private static RLConnectionUtil instance;
+
+    private ECInitParams ecInitParams;
 
     public static RLConnectionUtil getInstance(Context context) {
         if (instance == null) {
@@ -44,6 +49,18 @@ public class RLConnectionUtil {
                 }
             });
         }
+    }
+
+    public void login(String username) {
+        ecInitParams = ECInitParams.createParams();
+        ecInitParams.setUserid(username);
+        ecInitParams.setAppKey(AppConfigConsts.RL_APP_ID);
+        ecInitParams.setToken(AppConfigConsts.RL_APP_TOKEN);
+        ecInitParams.setAuthType(ECInitParams.LoginAuthType.NORMAL_AUTH);
+        ecInitParams.setMode(ECInitParams.LoginMode.FORCE_LOGIN);
+        ECDevice.setOnChatReceiveListener(RLConnectionHelper.getInstance(context));
+        ECDevice.setOnDeviceConnectListener(RLConnectionHelper.getInstance(context));
+        ECDevice.login(ecInitParams);
     }
 
     public interface RLConnectionCallBack {
