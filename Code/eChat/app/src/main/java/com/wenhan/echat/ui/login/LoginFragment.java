@@ -30,7 +30,7 @@ public class LoginFragment extends BaseFragment {
 
     private LoginActivity loginActivity;
 
-    private RLConnectionUtil rlConnectionUtil;
+    private SharedPrefUtil sharedPrefUtil;
 
     @Nullable
     @Override
@@ -60,25 +60,39 @@ public class LoginFragment extends BaseFragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pendingLogin();
+                if (usernameInputEt.getText().toString() == null && usernameInputEt.getText().toString().equals("")) {
+                    loginActivity.showToast(R.string.fragment_login_login_failed_empty_input);
+                    return;
+                }
+                usernameInputEt.setEnabled(false);
+                loginBtn.setEnabled(false);
+                loginActivity.pendingLogin(usernameInputEt.getText().toString());
             }
         });
     }
 
-    private void pendingLogin() {
-        if (usernameInputEt.getText().toString() == null && usernameInputEt.getText().toString().equals("")) {
-            loginActivity.showToast(R.string.fragment_login_login_failed_empty_input);
-            return;
-        }
-        loginActivity.showProgressDialog(getResources().getString(R.string.fragment_login_login_doing_tip), null);
-        usernameInputEt.setEnabled(false);
-        rlConnectionUtil.login(usernameInputEt.getText().toString());
-    }
-
     private void init() {
         loginActivity = (LoginActivity) getActivity();
-        rlConnectionUtil = RLConnectionUtil.getInstance(loginActivity.getBaseContext());
-        rememberMeCb.setChecked(SharedPrefUtil.getInstance(getActivity()).getRememberMeStatus());
+        sharedPrefUtil = SharedPrefUtil.getInstance(getActivity());
+        if (sharedPrefUtil.getRememberMeStatus()) {
+            rememberMeCb.setChecked(true);
+            usernameInputEt.setText(sharedPrefUtil.getLoginUserName());
+        } else {
+            rememberMeCb.setChecked(false);
+        }
+
+    }
+
+    //登陆成功
+    public void loginComplete() {
+        sharedPrefUtil.saveRememberMeStatus(rememberMeCb.isChecked());
+        sharedPrefUtil.saveLoginUserName(usernameInputEt.getText().toString());
+    }
+
+    //登录失败
+    public void loginFailed() {
+        usernameInputEt.setEnabled(true);
+        loginBtn.setEnabled(true);
     }
 
 }

@@ -3,12 +3,24 @@
     <!-- BaseActivity相关 -->
     <string name="activity_base_init_complete">初始化SDK成功</string>
     <string name="activity_base_init_failed">初始化SDK失败</string>
-    <!-- LoginFragment 相关 -->
+    <string name="activity_base_connect_complete">登陆成功</string>
+    <string name="activity_base_connect_failed">登录失败</string>
+    <string name="activity_base_connect_failed_kicked_off">您在另一地点登录，本机已退出</string>
+
+    <!-- LoginActivity 相关 -->
     <string name="fragment_login_welcome_tv_text">欢迎</string>
     <string name="fragment_login_username_tv_text">登录名</string>
     <string name="fragment_login_username_et_hint">在此输入登录账号</string>
     <string name="fragment_login_remember_me_cb">记住我</string>
     <string name="fragment_login_login_btn_text">登录</string>
     <string name="fragment_login_login_failed_empty_input">请输入登录名</string>
-    <string name="fragment_login_login_doing_tip">正在登录</string>
+
+    <string name="activity_login_login_doing_tip">正在登录</string>
+    <!-- MainActivity相关 -->
+    <string name="activity_main_bot_tab_recent">最近</string>
+    <string name="activity_main_bot_tab_contacts">联系人</string>
+    <string name="activity_main_bot_tab_settings">设置</string>
+
+    <string name="fragment_contact_group_entrance">群和讨论组</string>
+
 </resources>

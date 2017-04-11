@@ -11,8 +11,13 @@ public class Constants {
     public static final String SHARE_PREF_NAME = "eChat_shared_pref";
 
     /**
-     * 记住我
+     * 记住我状态
      */
     public static final String LOGIN_REMEMBER_ME = "remember_me";
+
+    /**
+     * 登录名
+     */
+    public static final String LOGIN_USER_NAME = "username";
 
 }

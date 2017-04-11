@@ -31,6 +31,26 @@ public class Constants {
     /**
      * 账号登录连接
      */
-    public static final String NAME_CONNECT = "com.wenhan.echat.connect";
+    public static final String ACTION_NAME_CONNECT = "com.wenhan.echat.connect";
+
+    /**
+     * 连接状态
+     */
+    public static final String CONNECT_KEY = "status";
+
+    /**
+     * 连接状态 成功
+     */
+    public static final String CONNECT_KEY_COMPLETE = "ok";
+
+    /**
+     * 连接状态 异地登录
+     */
+    public static final String CONNECT_KEY_KICKED_OFF = "kick_off";
+
+    /**
+     * 连接状态 失败
+     */
+    public static final String CONNECT_KEY_FAILED = "failed";
 
 }

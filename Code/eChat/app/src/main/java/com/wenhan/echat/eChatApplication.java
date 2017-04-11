@@ -9,4 +9,7 @@ import android.app.Application;
  */
 
 public class eChatApplication extends Application {
+
+    public boolean isLogin;
+
 }

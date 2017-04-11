@@ -51,6 +51,11 @@ public class RLConnectionUtil {
         }
     }
 
+    /**
+     * 登录
+     *
+     * @param username
+     */
     public void login(String username) {
         ecInitParams = ECInitParams.createParams();
         ecInitParams.setUserid(username);
@@ -60,6 +65,7 @@ public class RLConnectionUtil {
         ecInitParams.setMode(ECInitParams.LoginMode.FORCE_LOGIN);
         ECDevice.setOnChatReceiveListener(RLConnectionHelper.getInstance(context));
         ECDevice.setOnDeviceConnectListener(RLConnectionHelper.getInstance(context));
+        ECDevice.resetServer(context);
         ECDevice.login(ecInitParams);
     }
 

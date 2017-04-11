@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.wenhan.echat.ui.main.MainActivity">
+    android:layout_height="match_parent">
 
-</LinearLayout>
+    <!-- 底栏 -->
+    <android.support.design.widget.TabLayout
+        android:id="@+id/activity_main_bot_tab_tl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"></android.support.design.widget.TabLayout>
+
+    <!-- 内容ViewPager -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/activity_main_content_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/activity_main_bot_tab_tl"></android.support.v4.view.ViewPager>
+
+</RelativeLayout>

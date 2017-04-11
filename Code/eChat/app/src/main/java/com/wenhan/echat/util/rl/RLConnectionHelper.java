@@ -75,15 +75,22 @@ public class RLConnectionHelper implements RLConnectionUtil.RLConnectionCallBack
 
     @Override
     public void onConnectState(ECDevice.ECConnectState ecConnectState, ECError ecError) {
+        Intent intent = new Intent(Constants.ACTION_NAME_CONNECT);
         if (ecConnectState == ECDevice.ECConnectState.CONNECT_FAILED) {
             if (ecError.errorCode == SdkErrorCode.SDK_KICKED_OFF) {
                 Log.i(TAG, "异地登录");
+                intent.putExtra(Constants.CONNECT_KEY, Constants.CONNECT_KEY_KICKED_OFF);
+                context.sendBroadcast(intent);
             } else {
                 Log.i(TAG, "登录失败" + ecError.errorCode);
+                intent.putExtra(Constants.CONNECT_KEY, Constants.CONNECT_KEY_FAILED);
+                context.sendBroadcast(intent);
             }
             return;
         } else if (ecConnectState == ECDevice.ECConnectState.CONNECT_SUCCESS) {
             Log.i(TAG, "登陆成功");
+            intent.putExtra(Constants.CONNECT_KEY, Constants.CONNECT_KEY_COMPLETE);
+            context.sendBroadcast(intent);
         }
     }
 

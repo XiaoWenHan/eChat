@@ -37,4 +37,12 @@ public class SharedPrefUtil {
         return sharedPreferences.getBoolean(Constants.LOGIN_REMEMBER_ME, false);
     }
 
+    public void saveLoginUserName(String userName) {
+        sharedPreferences.edit().putString(Constants.LOGIN_USER_NAME, userName).commit();
+    }
+
+    public String getLoginUserName() {
+        return sharedPreferences.getString(Constants.LOGIN_USER_NAME, "");
+    }
+
 }

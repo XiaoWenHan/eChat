@@ -1,6 +1,7 @@
 package com.wenhan.echat.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.wenhan.echat.R;
+import com.wenhan.echat.eChatApplication;
+import com.wenhan.echat.ui.main.MainActivity;
 import com.wenhan.echat.util.rl.RLConnectionHelper;
 import com.wenhan.echat.util.rl.RLConnectionUtil;
 
@@ -29,15 +32,28 @@ public class BaseActivity extends AppCompatActivity {
 
     private RLConnectionHelper rlConnectionHelper;
 
+    private eChatApplication application;
+    protected final String SAVED_DATA_LOGIN_STATUS = "login_status";
+
     public static UIHandler uiHandler;
 
     public static final int MSG_INIT_STATUS = 0x01;
     public static final int MSG_INIT_STATUS_COMPLETE = 0x02;
     public static final int MSG_INIT_STATUS_FAILED = 0x03;
 
+    public static final int MSG_CONNECT_STATUS = 0x04;
+    public static final int MSG_CONNECT_STATUS_COMPLETE = 0x05;
+    public static final int MSG_CONNECT_STATUS_FAILED = 0x06;
+    public static final int MSG_CONNECT_STATUS_FAILED_KICKED_OFF = 0x07;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initData();
+    }
+
+    private void initData() {
+        application = (eChatApplication) getApplication();
     }
 
     @Override
@@ -101,6 +117,17 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(SAVED_DATA_LOGIN_STATUS, application.isLogin);
+        super.onSaveInstanceState(outState);
+    }
+
+    protected void jumpToMain() {
+        application.isLogin = true;
+        startActivity(new Intent(BaseActivity.this, MainActivity.class));
+    }
+
     public class UIHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -114,6 +141,17 @@ public class BaseActivity extends AppCompatActivity {
                         showToast(R.string.activity_base_init_failed);
                     }
                     break;
+                case MSG_CONNECT_STATUS:
+                    if (msg.arg1 == MSG_CONNECT_STATUS_COMPLETE) {
+
+                    }
+                    if (msg.arg1 == MSG_CONNECT_STATUS_FAILED_KICKED_OFF) {
+                        showToast(R.string.activity_base_connect_failed_kicked_off);
+                    }
+                    if (msg.arg1 == MSG_CONNECT_STATUS_FAILED) {
+
+                    }
+
             }
         }
     }
