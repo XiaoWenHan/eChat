@@ -91,6 +91,8 @@ public class MainActivity extends BaseActivity {
             tab.setCustomView(mainFragmentAdapter.getTabView(i));
         }
         pageSelect(0);
+        //检查个人资料设定
+        checkPersonProfile();
     }
 
     @Override
@@ -113,6 +115,10 @@ public class MainActivity extends BaseActivity {
                 getSupportActionBar().setTitle(R.string.activity_main_bot_tab_settings);
                 break;
         }
+    }
+
+    private void checkPersonProfile() {
+
     }
 
 }
